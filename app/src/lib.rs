@@ -5,6 +5,10 @@ use leptos_router::{
     StaticSegment,
 };
 
+use crate::components::{hero::Hero, navbar::NavBar};
+
+mod components;
+
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
@@ -34,6 +38,8 @@ pub fn App() -> impl IntoView {
         // sets the document title
         <Title text="Welcome to Leptos"/>
 
+        <NavBar/>
+
         // content for this welcome page
         <Router>
             <main>
@@ -48,12 +54,16 @@ pub fn App() -> impl IntoView {
 /// Renders the home page of your application.
 #[component]
 fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
-
     view! {
-        <h1>"Welcome to Leptos!"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
+    <Hero>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+            <h1 class="text-white text-5xl md:text-6xl font-bold">
+                Welcome
+            </h1>
+            <p class="text-white text-lg md:text-xl mt-3 opacity-90">
+                hello world
+            </p>
+        </div>
+    </Hero>
     }
 }
