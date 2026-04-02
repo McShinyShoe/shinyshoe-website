@@ -5,9 +5,13 @@ use leptos_router::{
     StaticSegment,
 };
 
-use crate::components::{hero::Hero, navbar::NavBar};
+use crate::{
+    components::{hero::Hero, navbar::NavBar},
+    pages::err404::Err404,
+};
 
 mod components;
+mod pages;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -36,14 +40,14 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/shinyshoe-website.css"/>
 
         // sets the document title
-        <Title text="Welcome to Leptos"/>
+        <Title text="ShinyShoe Website"/>
 
         <NavBar/>
 
         // content for this welcome page
         <Router>
-            <main>
-                <Routes fallback=|| "Page not found.".into_view()>
+            <main class="bg-base-300">
+                <Routes fallback=|| Err404>
                     <Route path=StaticSegment("") view=HomePage/>
                 </Routes>
             </main>
@@ -56,7 +60,7 @@ pub fn App() -> impl IntoView {
 fn HomePage() -> impl IntoView {
     view! {
     <Hero>
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
             <h1 class="text-white text-5xl md:text-6xl font-bold">
                 Welcome
             </h1>
