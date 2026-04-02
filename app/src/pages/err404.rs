@@ -2,12 +2,19 @@ use leptos::prelude::*;
 
 #[component]
 pub fn Err404() -> impl IntoView {
-    let go_back = move || {
-        window().history().unwrap().back().unwrap();
+    let go_back = || {
+        #[cfg(target_arch = "wasm32")]
+        {
+            if let Some(win) = web_sys::window() {
+                if let Ok(history) = win.history() {
+                    let _ = history.back();
+                }
+            }
+        }
     };
 
     view! {
-        <div class="bg-base-300 text-white flex items-center justify-center min-h-screen px-4">
+        <div class="text-white flex items-center justify-center min-h-screen px-4">
             <div class="text-center max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <h1 class="text-7xl font-extrabold text-primary">404</h1>
 
@@ -24,7 +31,7 @@ pub fn Err404() -> impl IntoView {
                     "Go Home"
                 </a>
 
-                <button onclick="history.back()" class="px-5 py-2.5 border border-gray-700 hover:bg-gray-800 rounded-lg font-medium transition">
+                <button on:click=move |_| go_back() class="px-5 py-2.5 border border-gray-700 hover:bg-gray-800 rounded-lg font-medium transition">
                     "Go Back"
                 </button>
                 </div>
