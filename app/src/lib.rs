@@ -20,6 +20,12 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <script>r#"
+                    const saved = localStorage.getItem("theme");
+                    if (saved) {
+                        document.documentElement.setAttribute("data-theme", saved);
+                    }
+                "#</script>
                 <Link rel="icon" type_="image/svg+xml" href="/favicon.svg"/>
                 <Link rel="icon" href="/favicon.ico"/>
                 <AutoReload options=options.clone()/>

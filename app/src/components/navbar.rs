@@ -1,5 +1,6 @@
 use leptos::{ev, prelude::*};
 use leptos_router::components::A;
+use web_sys::window;
 
 #[derive(Clone)]
 pub enum NavItem {
@@ -50,6 +51,20 @@ fn render_nav_item(item: NavItem) -> impl IntoView {
 
 #[component]
 pub fn NavBar() -> impl IntoView {
+    fn set_theme(theme: &str) {
+        let window = window().unwrap();
+        let document = window.document().unwrap();
+        let html = document.document_element().unwrap();
+
+        html.set_attribute("data-theme", theme).unwrap();
+        window
+            .local_storage()
+            .unwrap()
+            .unwrap()
+            .set_item("theme", theme)
+            .unwrap();
+    }
+
     let nav_items = vec![
         NavItem::link("Home", "/"),
         NavItem::dropdown(
@@ -63,7 +78,7 @@ pub fn NavBar() -> impl IntoView {
     let (pinned, set_pinned) = signal(false);
 
     window_event_listener(ev::scroll, move |_| {
-        let y = web_sys::window().unwrap().scroll_y().unwrap_or(0.0);
+        let y = window().unwrap().scroll_y().unwrap_or(0.0);
         set_pinned.set(y > 0.0);
     });
 
@@ -84,6 +99,15 @@ pub fn NavBar() -> impl IntoView {
             },
             ""
         )
+    };
+
+    let switch_state = move || {
+        let document = window().unwrap().document().unwrap();
+        let html = document.document_element().unwrap();
+
+        html.get_attribute("data-theme")
+            .map(|t| t == "dark")
+            .unwrap_or(false)
     };
 
     view! {
@@ -108,6 +132,17 @@ pub fn NavBar() -> impl IntoView {
                     </div>
 
                     <div class="navbar-end flex gap-2">
+                        <label class="toggle text-base-content">
+                            <input type="checkbox" prop:checked=switch_state on:change=move |ev| {
+                                let checked = event_target_checked(&ev);
+                                let theme = if checked { "dark" } else { "light" };
+                                set_theme(theme);
+                            }/>
+
+                            <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
+
+                            <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
+                        </label>
                         <input type="text" placeholder="Search" class="input input-bordered w-32 lg:w-auto" />
                         <div class="dropdown dropdown-end">
                             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
