@@ -1,7 +1,64 @@
 use leptos::prelude::*;
+use leptos_router::components::A;
+
+#[derive(Clone)]
+pub enum NavItem {
+    Link {
+        label: &'static str,
+        href: &'static str,
+    },
+    Dropdown {
+        label: &'static str,
+        children: Vec<NavItem>,
+    },
+}
+
+impl NavItem {
+    pub fn link(label: &'static str, href: &'static str) -> Self {
+        Self::Link { label, href }
+    }
+
+    pub fn dropdown(label: &'static str, children: Vec<NavItem>) -> Self {
+        Self::Dropdown { label, children }
+    }
+}
+
+fn render_nav_item(item: NavItem) -> impl IntoView {
+    match item {
+        NavItem::Link { label, href } => view! {
+            <li>
+                <A href=href>
+                    <button>{label}</button>
+                </A>
+            </li>
+        }
+        .into_any(),
+
+        NavItem::Dropdown { label, children } => view! {
+            <li>
+                <details>
+                    <summary>{label}</summary>
+                    <ul>
+                        {children.into_iter().map(render_nav_item).collect_view()}
+                    </ul>
+                </details>
+            </li>
+        }
+        .into_any(),
+    }
+}
 
 #[component]
 pub fn NavBar() -> impl IntoView {
+    let nav_items = vec![
+        NavItem::link("Home", "/"),
+        NavItem::dropdown(
+            "Mods",
+            vec![NavItem::link("CavernChat", "/mods/cavern-chat")],
+        ),
+        NavItem::dropdown("Plugins", vec![NavItem::link("-", "")]),
+        NavItem::link("About", "/about"),
+    ];
     view! {
         <div id="nav" class="fixed left-[10px] right-[10px] top-[10px] z-[9999] transition-all duration-200 ease-out">
             <div
@@ -13,24 +70,7 @@ pub fn NavBar() -> impl IntoView {
                         <div class="dropdown lg:hidden">
                             <label tabindex="0" class="btn btn-ghost">"☰"</label>
                             <ul tabindex="0" class="menu menu-sm dropdown-content mt-5 z-[10000] p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><button>Home</button></li>
-                                <li>
-                                    <details>
-                                        <summary>Mods</summary>
-                                        <ul>
-                                            <li><button>CavernChat</button></li>
-                                        </ul>
-                                    </details>
-                                </li>
-                                <li>
-                                    <details>
-                                        <summary>Plugins</summary>
-                                        <ul>
-                                            <li><button>-</button></li>
-                                        </ul>
-                                    </details>
-                                </li>
-                                <li><button>About</button></li>
+                                {nav_items.clone().into_iter().map(render_nav_item).collect_view()}
                             </ul>
                         </div>
 
@@ -39,24 +79,7 @@ pub fn NavBar() -> impl IntoView {
 
                     <div class="navbar-center hidden lg:flex">
                         <ul class="menu menu-horizontal px-1">
-                            <li><button>Home</button></li>
-                            <li>
-                                <details>
-                                    <summary>Mods</summary>
-                                    <ul class="p-2 bg-base-100 w-40 z-2 mt-6">
-                                        <li><button>CavernChat</button></li>
-                                    </ul>
-                                </details>
-                            </li>
-                            <li>
-                                <details>
-                                    <summary>Plugins</summary>
-                                    <ul class="p-2 bg-base-100 w-40 z-2 mt-6">
-                                        <li>-</li>
-                                    </ul>
-                                </details>
-                            </li>
-                            <li><button>About</button></li>
+                            {nav_items.clone().into_iter().map(render_nav_item).collect_view()}
                         </ul>
                     </div>
 
