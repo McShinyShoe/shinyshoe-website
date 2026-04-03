@@ -10,7 +10,7 @@ leptos.workspace = true
 leptos_meta.workspace = true
 leptos_router.workspace = true
 leptos_axum = { workspace = true, optional = true }
-web-sys = { version = "0.3", features = [ "Window" ] }
+web-sys = { version = "0.3", features = [ "Window", "Storage" ] }
 
 http.workspace = true
 cfg-if.workspace = true
