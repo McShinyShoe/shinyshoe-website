@@ -1,4 +1,4 @@
-use leptos::prelude::*;
+use leptos::{ev, prelude::*};
 use leptos_router::components::A;
 
 #[derive(Clone)]
@@ -59,12 +59,36 @@ pub fn NavBar() -> impl IntoView {
         NavItem::dropdown("Plugins", vec![NavItem::link("-", "")]),
         NavItem::link("About", "/about"),
     ];
+
+    let (pinned, set_pinned) = signal(false);
+
+    window_event_listener(ev::scroll, move |_| {
+        let y = web_sys::window().unwrap().scroll_y().unwrap_or(0.0);
+        set_pinned.set(y > 0.0);
+    });
+
+    let nav_class = move || {
+        format!(
+            "fixed left-[10px] right-[10px] z-[9999] transition-all duration-200 ease-out {}",
+            if pinned.get() { "top-0" } else { "top-[10px]" }
+        )
+    };
+
+    let nav_inner_class = move || {
+        format!(
+            "bg-base-100 w-full transition-all duration-200 ease-out {} {}",
+            if pinned.get() {
+                "rounded-t-none rounded-b-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.16)]"
+            } else {
+                "rounded-[14px] shadow-[0_10px_28px_rgba(0,0,0,0.12)]"
+            },
+            ""
+        )
+    };
+
     view! {
-        <div id="nav" class="fixed left-[10px] right-[10px] top-[10px] z-[9999] transition-all duration-200 ease-out">
-            <div
-                id="navInner"
-                class="bg-base-100 shadow-[0_10px_28px_rgba(0,0,0,0.12)] rounded-[14px] w-full transition-all duration-200 ease-out"
-            >
+        <div id="nav" class=nav_class>
+            <div id="navInner" class=nav_inner_class>
                 <div class="navbar px-3 py-2">
                     <div class="navbar-start">
                         <div class="dropdown lg:hidden">
@@ -105,29 +129,5 @@ pub fn NavBar() -> impl IntoView {
                 </div>
             </div>
         </div>
-
-        <script>
-            r#"
-            const nav = document.getElementById('nav');
-            const navbarInner = document.getElementById('navInner');
-
-            function onScroll() {
-                const pinned = window.scrollY > 0;
-
-                nav.classList.toggle('top-[10px]', !pinned);
-                nav.classList.toggle('top-0', pinned);
-
-                navbarInner.classList.toggle('rounded-[14px]', !pinned);
-                navbarInner.classList.toggle('rounded-t-none', pinned);
-                navbarInner.classList.toggle('rounded-b-[14px]', pinned);
-
-                navbarInner.classList.toggle('shadow-[0_10px_28px_rgba(0,0,0,0.12)]', !pinned);
-                navbarInner.classList.toggle('shadow-[0_8px_20px_rgba(0,0,0,0.16)]', pinned);
-            }
-
-            document.addEventListener('scroll', onScroll, { passive: true });
-            onScroll();
-            "#
-        </script>
     }
 }
