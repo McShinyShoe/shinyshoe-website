@@ -44,10 +44,11 @@ pub fn App() -> impl IntoView {
         // sets the document title
         <Title text="ShinyShoe Website"/>
 
-        <NavBar/>
 
         // content for this welcome page
         <Router>
+            <NavBar/>
+
             <main class="bg-base-300">
                 <Routes fallback=|| Err404>
                     <Route path=StaticSegment("") view=HomePage/>
