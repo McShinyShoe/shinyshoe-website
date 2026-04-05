@@ -84,20 +84,19 @@ pub fn NavBar() -> impl IntoView {
 
     let nav_class = move || {
         format!(
-            "fixed left-[10px] right-[10px] z-[9999] transition-all duration-200 ease-out {}",
+            "fixed inset-x-0 flex justify-center z-[9999] transition-all duration-200 ease-out {}",
             if pinned.get() { "top-0" } else { "top-[10px]" }
         )
     };
 
     let nav_inner_class = move || {
         format!(
-            "bg-base-100 w-full transition-all duration-200 ease-out {} {}",
+            "bg-base-100 w-full max-w-6xl mx-auto transition-all duration-200 ease-out {}",
             if pinned.get() {
                 "rounded-t-none rounded-b-[14px] shadow-[0_8px_20px_rgba(0,0,0,0.16)]"
             } else {
                 "rounded-[14px] shadow-[0_10px_28px_rgba(0,0,0,0.12)]"
             },
-            ""
         )
     };
 
