@@ -1,0 +1,10 @@
+docs/
+node_modules/
+target/
+
+.dockerignore
+.gitignore
+docker-compose.yml
+dockerfile
+LICENSE
+README.md
