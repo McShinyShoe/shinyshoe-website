@@ -113,7 +113,7 @@ const SITES: [Site; 5] = [
     },
 ];
 
-const STACK: [&str; 5] = ["Rust", "Leptos", "Axum", "WASM", "Catppuccin"];
+const STACK: [&str; 4] = ["Rust", "Leptos", "Axum", "WASM"];
 
 #[component]
 pub fn HomePage() -> impl IntoView {
@@ -133,7 +133,7 @@ pub fn HomePage() -> impl IntoView {
                     </span>
                 </h1>
                 <p class="sh-hero__desc">
-                    "Just a goober doing goofy things, mostly in Java and Rust (and sometimes C++)."
+                    "Just a goober doing goofy things, mostly in Rust and C++ (and sometimes Java)."
                 </p>
                 <div class="sh-hero__actions">
                     <a class="sh-btn sh-btn--primary" href="#projects">
@@ -216,6 +216,8 @@ fn Terminal() -> impl IntoView {
             </div>
             <pre data-prefix="$"><code><span class="tk-f">"whoami"</span></code></pre>
             <pre data-prefix=">"><code>"shinyshoe"</code></pre>
+            <pre data-prefix="$"><code><span class="tk-f">"uname"</span>" -r"</code></pre>
+            <pre data-prefix=">"><code>"1.u53-arch-btw"</code></pre>
             <pre data-prefix="$"><code><span class="tk-f">"ls"</span>" "<span class="tk-p">"~/projects"</span></code></pre>
             <pre data-prefix=">"><code>"cavern-chat        storage-tracker"</code></pre>
             <pre data-prefix=">"><code>"journalism         lestallum-website"</code></pre>

@@ -26,6 +26,14 @@ main {
   text-transform: none;
 }
 
+/* same for badges, "Mod" and "Rust" instead of MOD and RUST. 12px since the 11px size was
+   picked for caps, still fits the 22px pill */
+.sh-badge {
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 /* ---------- Home ---------- */
 
 .home-hero {
