@@ -1,0 +1,149 @@
+/* Site layout on top of Shiny (public/shiny). The components and their looks come from
+   bundle.css; this file only places them on the page, using Shiny's tokens. */
+
+/* no background here: body.sh-page's ground has to reach the viewport,
+   or it paints over the Backdrop (which sits at z-index -1) */
+html {
+  scrollbar-gutter: stable;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+main {
+  display: grid;
+  gap: var(--sh-space-12);
+  padding-bottom: var(--sh-space-12);
+}
+
+/* eyebrows stay in the sentence case they're written in; caps tracking and the 11px
+   caps size go with it (same move as Shiny's table of contents title, mono 13/20) */
+.sh-eyebrow {
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ---------- Home ---------- */
+
+.home-hero {
+  width: 100%;
+  max-width: calc(1040px + 2 * var(--sh-space-6));
+  min-height: min(640px, calc(100svh - 88px));
+  margin-inline: auto;
+}
+
+/* hold the rotating word at its longest ("websites", 8 mono chars), so the title wraps
+   the same way for every word instead of jumping between one and two lines */
+.home-hero .sh-text-rotate {
+  min-width: 8ch;
+}
+
+.home-section {
+  display: grid;
+  gap: var(--sh-space-6);
+  width: min(1040px, 100% - 2 * var(--sh-space-4));
+  margin-inline: auto;
+  /* clear of the floating navbar when jumped to */
+  scroll-margin-top: 96px;
+}
+
+.home-grid {
+  display: grid;
+  gap: var(--sh-space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+}
+
+.home-project {
+  display: flex;
+  flex-direction: column;
+}
+
+/* actions sit on the bottom edge so a row of cards lines up */
+.home-project .sh-card__actions {
+  margin-top: auto;
+  padding-top: var(--sh-space-6);
+}
+
+.home-project__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sh-space-2);
+  margin-bottom: var(--sh-space-3);
+}
+
+.home-project__lang {
+  color: var(--sh-text-muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.home-site {
+  display: grid;
+  gap: var(--sh-space-6);
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.home-stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sh-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-site__actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* heading beside its content on wide screens, above it on narrow ones */
+.home-split {
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .home-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: var(--sh-space-12);
+  }
+}
+
+/* the row's description says what it is; the hostname is a bonus on wider rows */
+@media (max-width: 560px) {
+  .home-host { display: none; }
+}
+
+/* Lucide icons Shiny's set doesn't have, drawn the same way (2.5 stroke, round caps) */
+.sh-icon[data-icon="cloud"] {
+  --sh-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z'/%3E%3C/svg%3E");
+}
+
+.sh-icon[data-icon="pencil"] {
+  --sh-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z'/%3E%3Cpath d='m15 5 4 4'/%3E%3C/svg%3E");
+}
+
+.sh-icon[data-icon="activity"] {
+  --sh-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 12h-4l-3 9L9 3l-3 9H2'/%3E%3C/svg%3E");
+}
+
+/* ---------- 404 ---------- */
+
+.err404 {
+  min-height: calc(100svh - 88px);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  width: 100%;
+  max-width: calc(1040px + 2 * var(--sh-space-6));
+  margin-inline: auto;
+}

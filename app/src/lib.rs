@@ -6,33 +6,35 @@ use leptos_router::{
 };
 
 use crate::{
-    components::{hero::Hero, navbar::NavBar},
-    pages::err404::Err404,
+    components::{backdrop::Backdrop, footer::Footer, navbar::NavBar},
+    pages::{err404::Err404, home::HomePage},
+    shiny::ShinyWiring,
 };
 
 mod components;
 mod pages;
+mod shiny;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
-        <html lang="en" class="[scrollbar-gutter:stable]">
+        <html lang="en">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <script>r#"
-                    const saved = localStorage.getItem("theme");
-                    if (saved) {
-                        document.documentElement.setAttribute("data-theme", saved);
-                    }
-                "#</script>
+                <meta name="theme-color" content="#24273a"/>
+                <Link rel="preload" href="/shiny/fonts/JetBrainsMono-Variable.woff2" as_="font" type_="font/woff2" crossorigin=""/>
+                <link rel="stylesheet" href="/shiny/tokens.css"/>
+                <link rel="stylesheet" href="/shiny/bundle.css"/>
+                // before the hydration script, so window.Shiny exists by the time the app wires it
+                <script src="/shiny/bundle.js" defer></script>
                 <Link rel="icon" type_="image/svg+xml" href="/favicon.svg"/>
                 <Link rel="icon" href="/favicon.ico"/>
                 <AutoReload options=options.clone()/>
                 <HydrationScripts options/>
                 <MetaTags/>
             </head>
-            <body>
+            <body class="sh-page">
                 <App/>
             </body>
         </html>
@@ -41,42 +43,26 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
 
 #[component]
 pub fn App() -> impl IntoView {
-    // Provides context that manages stylesheets, titles, meta tags, etc.
+    // gives context that manages stuff
     provide_meta_context();
 
     view! {
         <Stylesheet id="leptos" href="/pkg/shinyshoe-website.css"/>
 
-        // sets the document title
-        <Title text="ShinyShoe Website"/>
+        <Title text="ShinyShoe"/>
 
-
-        // content for this welcome page
         <Router>
+            <Backdrop/>
             <NavBar/>
 
-            <main class="bg-base-300">
+            <main>
                 <Routes fallback=|| Err404>
                     <Route path=StaticSegment("") view=HomePage/>
                 </Routes>
             </main>
-        </Router>
-    }
-}
 
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    view! {
-    <Hero>
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <h1 class="text-white text-5xl md:text-6xl font-bold">
-                Welcome
-            </h1>
-            <p class="text-white text-lg md:text-xl mt-3 opacity-90">
-                hello world
-            </p>
-        </div>
-    </Hero>
+            <Footer/>
+            <ShinyWiring/>
+        </Router>
     }
 }

@@ -1,0 +1,180 @@
+/* Shiny — generated from tokens.json */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root, [data-theme="macchiato"] {
+  --ctp-rosewater: #f4dbd6;
+  --ctp-flamingo: #f0c6c6;
+  --ctp-pink: #f5bde6;
+  --ctp-mauve: #c6a0f6;
+  --ctp-red: #ed8796;
+  --ctp-maroon: #ee99a0;
+  --ctp-peach: #f5a97f;
+  --ctp-yellow: #eed49f;
+  --ctp-green: #a6da95;
+  --ctp-teal: #8bd5ca;
+  --ctp-sky: #91d7e3;
+  --ctp-sapphire: #7dc4e4;
+  --ctp-blue: #8aadf4;
+  --ctp-lavender: #b7bdf8;
+  --ctp-text: #cad3f5;
+  --ctp-subtext1: #b8c0e0;
+  --ctp-subtext0: #a5adcb;
+  --ctp-overlay2: #939ab7;
+  --ctp-overlay1: #8087a2;
+  --ctp-overlay0: #6e738d;
+  --ctp-surface2: #5b6078;
+  --ctp-surface1: #494d64;
+  --ctp-surface0: #363a4f;
+  --ctp-base: #24273a;
+  --ctp-mantle: #1e2030;
+  --ctp-crust: #181926;
+  --sh-page: var(--ctp-base);
+  --sh-card: rgba(30, 32, 48, 0.78);
+  --sh-field: rgba(24, 25, 38, 0.55);
+  --sh-field-hover: rgba(54, 58, 79, 0.6);
+  --sh-raised: var(--ctp-surface0);
+  --sh-raised-2: var(--ctp-surface1);
+  --sh-popover: rgba(30, 32, 48, 0.94);
+  --sh-scrim: rgba(24, 25, 38, 0.6);
+  --sh-hairline: rgba(202, 211, 245, 0.08);
+  --sh-border: var(--ctp-surface0);
+  --sh-border-strong: var(--ctp-surface2);
+  --sh-border-control: var(--ctp-overlay0);
+  --sh-text: var(--ctp-text);
+  --sh-text-muted: var(--ctp-subtext0);
+  --sh-text-subtle: var(--ctp-overlay1);
+  --sh-accent: var(--ctp-mauve);
+  --sh-accent-alt: var(--ctp-blue);
+  --sh-accent-soft: rgba(198, 160, 246, 0.14);
+  --sh-accent-edge: rgba(198, 160, 246, 0.35);
+  --sh-on-accent: var(--ctp-crust);
+  --sh-focus: var(--ctp-lavender);
+  --sh-link: var(--ctp-blue);
+  --sh-link-hover: var(--ctp-sapphire);
+  --sh-danger: var(--ctp-red);
+  --sh-danger-soft: rgba(237, 135, 150, 0.1);
+  --sh-danger-edge: rgba(237, 135, 150, 0.3);
+  --sh-info: var(--ctp-sapphire);
+  --sh-info-soft: rgba(125, 196, 228, 0.1);
+  --sh-info-edge: rgba(125, 196, 228, 0.3);
+  --sh-warning: var(--ctp-yellow);
+  --sh-warning-soft: rgba(238, 212, 159, 0.1);
+  --sh-warning-edge: rgba(238, 212, 159, 0.3);
+  --sh-success: var(--ctp-green);
+  --sh-success-soft: rgba(166, 218, 149, 0.1);
+  --sh-success-edge: rgba(166, 218, 149, 0.3);
+  --sh-rating: var(--ctp-yellow);
+  --sh-rating-hover: var(--ctp-peach);
+  --sh-shadow-card: inset 0 1px 0 rgba(202, 211, 245, 0.04), 0 30px 80px -20px rgba(24, 25, 38, 0.8), 0 0 0 1px rgba(24, 25, 38, 0.4);
+  --sh-shadow-pop: inset 0 1px 0 rgba(202, 211, 245, 0.05), 0 18px 48px -12px rgba(24, 25, 38, 0.85), 0 0 0 1px rgba(24, 25, 38, 0.5);
+  --sh-glow: 0 4px 14px -8px rgba(198, 160, 246, 0.4);
+  --sh-glow-hover: 0 6px 18px -8px rgba(138, 173, 244, 0.45);
+  --sh-glow-danger: 0 4px 14px -8px rgba(237, 135, 150, 0.4);
+  --sh-glow-selected: 0 0 0 1px rgba(198, 160, 246, 0.35), 0 8px 24px -12px rgba(198, 160, 246, 0.6);
+  --sh-glow-dot: 0 0 12px -2px rgba(198, 160, 246, 0.7);
+  --sh-halo: 0 0 0 4px rgba(198, 160, 246, 0.18), 0 0 24px -4px rgba(198, 160, 246, 0.45);
+  --sh-halo-danger: 0 0 0 4px rgba(237, 135, 150, 0.2);
+  --sh-focus-ring: 0 0 0 2px #24273a, 0 0 0 4px #b7bdf8;
+}
+
+:root {
+  --sh-space-1: 4px;
+  --sh-space-2: 8px;
+  --sh-space-3: 12px;
+  --sh-space-4: 16px;
+  --sh-space-6: 24px;
+  --sh-space-8: 32px;
+  --sh-space-12: 48px;
+  --sh-radius-xs: 6px;
+  --sh-radius-sm: 12px;
+  --sh-radius-md: 18px;
+  --sh-radius-lg: 24px;
+  --sh-radius-pill: 999px;
+  --sh-size-control-xs: 28px;
+  --sh-size-control: 44px;
+  --sh-size-control-sm: 36px;
+  --sh-size-control-lg: 52px;
+  --sh-size-check: 16px;
+  --sh-size-icon: 16px;
+  --sh-ease-out: cubic-bezier(.22,1,.36,1);
+  --sh-ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --sh-duration-fast: 150ms;
+  --sh-duration-base: 250ms;
+  --sh-duration-slow: 600ms;
+  --sh-z-sticky: 10;
+  --sh-z-dropdown: 40;
+  --sh-z-drawer: 50;
+  --sh-z-fab: 60;
+  --sh-z-toast: 70;
+  --sh-z-tooltip: 80;
+  --font-sans: system-ui, -apple-system, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "JetBrainsMono Nerd Font", "Fira Code", ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+.type-display {
+  font-family: var(--font-mono);
+  font-size: 44px;
+  line-height: 52px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.type-figure {
+  font-family: var(--font-mono);
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.type-title {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.type-headline {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.type-button {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.type-numeral {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+.type-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.type-body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+}
+.type-small {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+}

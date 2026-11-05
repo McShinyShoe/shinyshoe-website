@@ -1,2 +1,3 @@
-pub mod hero;
+pub mod backdrop;
+pub mod footer;
 pub mod navbar;

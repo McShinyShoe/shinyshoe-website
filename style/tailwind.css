@@ -1,6 +1,0 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-
-@plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake;
-}

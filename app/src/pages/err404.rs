@@ -14,36 +14,24 @@ pub fn Err404() -> impl IntoView {
     };
 
     view! {
-        <div class="flex items-center justify-center min-h-screen px-4 text-base-content">
-            <div class="text-center max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
-
-                <h1 class="text-7xl font-extrabold text-primary">404</h1>
-
-                <h2 class="mt-4 text-2xl font-semibold text-base-content/70">
-                    "Page Not Found"
-                </h2>
-
-                <p class="mt-2 text-base-content/70">
+        <section class="sh-hero err404">
+            <div class="sh-hero__content">
+                <span class="sh-badge sh-badge--danger">"Error 404"</span>
+                <h1 class="sh-hero__title">"Page not found"</h1>
+                <p class="sh-hero__desc">
                     "The page you’re looking for doesn’t exist or has been moved."
                 </p>
-
-                <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-
-                    <a href="/" class="btn btn-primary">
-                        "Go Home"
-                    </a>
-
-                    <button on:click=move |_| go_back() class="btn btn-outline">
-                        "Go Back"
+                <div class="sh-hero__actions">
+                    <button type="button" class="sh-btn sh-btn--secondary" on:click=move |_| go_back()>
+                        <span class="sh-icon" data-icon="arrow-left" aria-hidden="true"></span>
+                        "Go back"
                     </button>
-
+                    <a href="/" class="sh-btn sh-btn--primary">
+                        "Go home"
+                        <span class="sh-icon" data-icon="arrow-right" aria-hidden="true"></span>
+                    </a>
                 </div>
-
-                <div class="mt-10 text-xs text-base-content/50">
-                    "Error code: 404_NOT_FOUND"
-                </div>
-
             </div>
-        </div>
+        </section>
     }
 }
